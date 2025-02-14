@@ -41,7 +41,7 @@ export const fetchOrCreateMessage = async (name: string) => {
 const generateRandomMessage = async (name: string) => {
     const tones = ['sweet', 'warm', 'casual', 'inspirational'];
     const randomTone = tones[Math.floor(Math.random() * tones.length)];
-    const prompt = `Write a ${randomTone} Valentine's message for ${name}. Make it unique, heartfelt, and meaningful. Keep the focus entirely on them—avoid mentioning the sender. Ensure the message feels personal and uplifting, staying within 200 tokens.`;
+    const prompt = `Write a ${randomTone} Valentine's message for ${name}. Make it unique, heartfelt, and meaningful. Keep the focus entirely on them—avoid mentioning the sender. Ensure the message feels personal and uplifting, staying not more than 200 tokens for the output`;
 
     const aiMessage = await generateMessage(prompt, 0.9);
 
