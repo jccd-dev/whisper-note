@@ -10,7 +10,7 @@ export default async function MyMessage({
 }) {
     const name = (await params).name;
     return (
-        <main className="min-h-screen flex flex-col items-center justify-center bg-pink-50 my-8">
+        <main className="min-h-screen flex flex-col items-center justify-center bg-pink-50 py-12">
             <HeartsBackground />
             <Suspense fallback={<LoadingMessage />}>
                 <MessageContent name={name} />
