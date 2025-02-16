@@ -14,8 +14,6 @@ export const generateMessage = async (
             model: 'gpt-4o-mini',
             messages: [{ role: 'user', content: promt }],
             temperature: temperature,
-            max_tokens: 200,
-            top_p: 0.8,
         });
         return response.choices[0]?.message.content || '';
     } catch (err) {

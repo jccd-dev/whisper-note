@@ -58,9 +58,9 @@ export default function GetMessage() {
     // placeholders
     const placeholders = [
         'Your Name or Nickname',
-        'Name that I Know You',
-        'How I Called You',
-        'Name I Remember You As',
+        'Name that others Know You',
+        'How Others Called You',
+        'How You Want to be Called',
     ];
 
     return (
@@ -78,7 +78,7 @@ export default function GetMessage() {
                 <h1 className="text-3xl font-bold text-pink-600 mb-2">
                     Whisper Note
                 </h1>
-                <p className="text-gray-500 mb-6 ">
+                <p className="text-gray-500 mb-6 mx-8 text-center">
                     Enter your name or nickname to get your whisper note.
                 </p>
                 <div className="">
