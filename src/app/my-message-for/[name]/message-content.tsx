@@ -2,12 +2,12 @@ import Image from 'next/image';
 import writtingImage from '../../../../public/images/writting.gif';
 // Removed unused import for cuteImage
 import { TextGenerateEffect } from '@/components/ui/text-generated-effect';
-import { fetchOrCreateMessage } from '@/utils/messageService';
+import { getMessage } from '@/app/actions';
 
 export default async function MessageContent({ name }: { name: string }) {
     const cleanName = name.replace(/-/g, ' ');
 
-    const { aiMessage } = await fetchOrCreateMessage(cleanName);
+    const { aiMessage } = await getMessage(cleanName);
 
     return (
         <>

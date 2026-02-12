@@ -3,8 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { PlaceholdersAndVanishInput } from '@/components/ui/placeholders-and-vanish-input';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import db from '@/utils/firebaseConfig';
+import { checkNameExists } from '@/app/actions';
 import Image from 'next/image';
 import cuteHello from '../../../public/images/CatHello.gif';
 
@@ -17,12 +16,8 @@ export default function GetMessage() {
         e.preventDefault();
         if (name) {
             try {
-                const namesRef = collection(db, 'selected_persons');
-                const q = query(
-                    namesRef,
-                    where('nickname_Name', 'array-contains', name)
-                );
-                const querySnapshot = await getDocs(q);
+                // Verify DB connection/name existence (optional but keeps original flow)
+                await checkNameExists(name);
 
                 const formattedName = name
                     .split(' ')
@@ -30,13 +25,8 @@ export default function GetMessage() {
                     .join('-')
                     .trim();
 
-                if (!querySnapshot.empty) {
-                    setError('');
-
-                    router.push(`/my-message-for/${formattedName}`);
-                } else {
-                    router.push(`/my-message-for/${formattedName}`);
-                }
+                setError('');
+                router.push(`/my-message-for/${formattedName}`);
             } catch (error) {
                 console.error(error);
                 setError('An error occurred. Please try again later.');
