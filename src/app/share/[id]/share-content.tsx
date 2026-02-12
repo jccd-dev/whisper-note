@@ -37,10 +37,22 @@ export default function ShareContent({ id, initialData }: ShareContentProps) {
         [initialData.isLocked, unlockedMessage]
     );
     const salutationText = useMemo(() => {
-        return initialData.salutation.replace(
-            /\[Name\]|\{Name\}|\{name\}|\[name\]/g,
-            initialData.recipientName
-        );
+        const salutation = (initialData.salutation ?? '').trim();
+        const recipientName = (initialData.recipientName ?? '').trim();
+
+        if (!salutation) return recipientName;
+        if (!recipientName) return salutation;
+
+        const placeholderRegex = /\[Name\]|\{Name\}|\{name\}|\[name\]/g;
+        if (placeholderRegex.test(salutation)) {
+            return salutation.replace(placeholderRegex, recipientName);
+        }
+
+        if (salutation.toLowerCase().includes(recipientName.toLowerCase())) {
+            return salutation;
+        }
+
+        return `${salutation} ${recipientName}`;
     }, [initialData.recipientName, initialData.salutation]);
 
     const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
